@@ -1,5 +1,6 @@
 
 export * as signaling from './signaling.ts'
-export * as rtcConnection from './rtcConnection.ts'
-export { Event } from './events.ts'
+export { sendSignal } from './rtcConnection.ts'
+export * as rtcConnection  from './rtcConnection.ts'
+export { Event, fire, on } from './events.ts'
 export { initPeers, callee, registerPeer } from './peers.ts'
