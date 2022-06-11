@@ -9,9 +9,10 @@
 import { Event } from './mod.ts'
 import { initPeers, callee, registerPeer } from './mod.ts'
 import { rtcConnection } from './mod.ts'
-import { postURL, sseURL } from './mod.ts'
 
-
+export const serviceURL = 'http:localhost:8000'
+export const postURL = '/api/post'
+export const sseURL = '/api/sse?id='
 
 const DEBUG = true
 
