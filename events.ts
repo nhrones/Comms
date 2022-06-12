@@ -1,13 +1,13 @@
+// deno-lint-ignore-file no-explicit-any
 
 /** generic event Handler type */
-// deno-lint-ignore no-explicit-any
 type Handler<T = any> = (data: T) => void;
 
 /** event handlers map */
 const eventHandlers: Map<string, Handler[]> = new Map()
 
 /** registers a handler function to be executed when an event is fired */
-export const on = (event: string, handler: Handler): void => {
+export const on = <K extends keyof Event>(event: K, handler: Handler): void => {
     if (eventHandlers.has(event)) {
         const handlers = eventHandlers.get(event)!
         handlers.push(handler)
@@ -16,8 +16,8 @@ export const on = (event: string, handler: Handler): void => {
     }
 }
 
-/** execute all registered handlers for event name*/
-export const fire = (event: string, data: unknown) => {
+/** execute all registered handlers for event name */
+export const fire = <K extends keyof Event>(event: K, data?: Event[K]) => {
     const handlers = eventHandlers!.get(event)
     if (handlers) {
         for (const handler of handlers) {

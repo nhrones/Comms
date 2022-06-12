@@ -76,15 +76,15 @@ export const initialize = () => {
     })
 
     // A peer is offering to connect
-    onEvent('invitation', (data: any) => {
+    onEvent('invitation', (caller: Peer) => {
         // I'll initiate an RTC-connection unless I'm engaged already.
         if (peerConnection) {
             if (DEBUG) console.log(`Already connected, ignoring this 'invitation'!`);
             return;
         }
-        // we got an invitation from a caller-peer
-        setCaller(data)
-        if (DEBUG) console.log(`A peer named ${data.name} has sent me an 'invitation'!  I'll make a  WebRTC-connection!`);
+        // we got an invitation from a peer(caller)
+        setCaller(caller)
+        if (DEBUG) console.log(`A peer named ${caller.name} has sent me an 'invitation'!  I'll make a  WebRTC-connection!`);
         // start the RTC-connection
         makeConnection();
     })

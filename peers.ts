@@ -38,9 +38,9 @@ export const registerPeer = (id: string, _name: string) => {
     fetch(postURL, { method: "POST", body: msg })
 }
 
-// We start-up assuming we're first; the callee.   
+// We start-up assuming we are the first-(the callee).   
 // If we happen to connect after another peer, our role 
-// will become caller and we'll need to adjust our role.
+// will be the `caller`, and we'll need to adjust our name.
 export function swapPeers(newName: string) {
     caller.name = newName
 }
