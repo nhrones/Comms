@@ -1,6 +1,6 @@
 
 import { postURL } from './signaling.ts'
-import { Event } from './events.ts'
+//import type { Event } from './events.ts'
 
 export let callee: Peer = {
     id: 'callee',
@@ -32,7 +32,7 @@ export function initPeers(id: string, name: string) {
 export const registerPeer = (id: string, _name: string) => {
     const msg = JSON.stringify({
         from: id,
-        event: Event.RegisterPeer,
+        event: 'RegisterPeer',
         data: callee
     })
     fetch(postURL, { method: "POST", body: msg })

@@ -1,6 +1,10 @@
 // deno-lint-ignore-file
+/// <reference no-default-lib="true" />
+/// <reference lib="dom" />
+/// <reference lib="dom.asynciterable" />
+/// <reference lib="deno.ns" />
+/// <reference lib="deno.unstable" />
 
-import { Event } from './events.ts'
 import { Peer, callee, caller, setCaller } from './peers.ts'
 import { 
     dispatch, 
@@ -107,7 +111,7 @@ function reset (data: {title:string, msg:string}) {
     //@ts-ignore
     peerConnection = null
     start()
-    dispatch(Event.ShowPopup, data)
+    dispatch('ShowPopup', data)
 }
 
 /** creates a new peer connection 
@@ -182,7 +186,7 @@ function checkDataChannelState() {
     } else if (dataChannel.readyState === ReadyState.closed) {
         if (RTCopen === true) {
             RTCopen = false
-            dispatch(Event.RemovePeer, caller.id) 
+            dispatch('RemovePeer', caller.id) 
             reset({title:'Disconnect', msg:`${caller.name} has disconnected!`})
         }
     }
