@@ -1,5 +1,3 @@
-# ignore ALL files in directory named .vscode
-.vscode/
 
 # ignore ALL files in directory named docs
 docs/
