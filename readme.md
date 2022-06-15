@@ -9,4 +9,11 @@ It includes:
         *  Client =  signaling.ts    
         *  Server = FreshDiceRTC -> routes/api/sse.ts    
   *  WebRTC connection module    
-  *  And a Peers management module    
+  *  A Peers management module
+
+## See it: 
+Open two instances of https://fresh-dice-rtc.deno.dev/
+
+After the second instance(Peer) establishes a connection, the signal-server is no longer required.     
+All further game communication is via a `WebRTC-dataChannel`.      
+You can view the comms logs by opening the chrome devtools console.    
