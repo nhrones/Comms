@@ -1,4 +1,4 @@
-import type { Peer, PeerRole} from './types.ts'
+import type { Peer} from './types.ts'
 import { postURL } from './signaling.ts'
 
 export let callee: Peer = {

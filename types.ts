@@ -5,7 +5,7 @@ export type Peer = {
     role: PeerRole
 }
 
-export type PeerRole = 'callee' | 'caller'
+type PeerRole = 'callee' | 'caller'
 
 /** generic event Handler type */
 export type Handler<T = any> = (data: T) => void;
