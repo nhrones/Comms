@@ -1,6 +1,5 @@
-
+import type { Peer, PeerRole} from './types.ts'
 import { postURL } from './signaling.ts'
-//import type { Event } from './events.ts'
 
 export let callee: Peer = {
     id: 'callee',
@@ -44,12 +43,3 @@ export const registerPeer = (id: string, _name: string) => {
 export function swapPeers(newName: string) {
     caller.name = newName
 }
-
-export type Peer = {
-    id: string,
-    name: string,
-    alias: string,
-    role: PeerRole
-}
-
-type PeerRole = 'callee' | 'caller'

@@ -1,5 +1,4 @@
-
-//import { Event } from './events.ts'
+import type { SignalingMessage } from './types.ts'
 import { initPeers, callee, registerPeer } from './peers.ts'
 import * as rtcConnection from './rtcConnection.ts'
 
@@ -14,11 +13,7 @@ const DEBUG = true
 // deno-lint-ignore ban-types
 const subscriptions = new Map<number | string, Function[]>()
 
-/** sse - Server Sent Events listener    
- * An EventSource instance opens a persistent     
- * connection to an HTTP server, which sends events     
- * in text/event-stream format. The connection remains     
- * open until closed by calling EventSource.close(). */
+/** sse - Server Sent Events listener */
 export let sse: EventSource
 
 
@@ -63,14 +58,12 @@ export const initialize = (name: string, id: string) => {
         if (DEBUG) console.info('               event: ', event)
         dispatch(event, msgObject.data)
     }
-
-    // SetID-Event listener. 
+ 
     // On connect, the signal-service will send our new ID.
     sse.addEventListener('SetID', (ev: MessageEvent) => {
         const msgObject = JSON.parse(ev.data)
         const { data } = msgObject
-        registerPeer( data.id, callee.name )
-        // dispatch this event to any subscribers     
+        registerPeer( data.id, callee.name )     
         dispatch('SetID', { id: data.id, name: callee.name })
         rtcConnection.start()
     })
@@ -83,13 +76,7 @@ export const getState = (msg: string) => {
     if (sse.readyState === SSE.CLOSED) console.log(msg + ' - ' + 'SSE-State - closed')
 }
 
-/** disconnect - Stop the event stream from the client, 
- * we simply invoked the close() method of the eventSource object. 
- * Closing the event stream on the client doesn't automatically 
- * closes the connection on the server side. Unfortunately, 
- * the server will continue to send events to the client. 
- * To avoid this, we'll need to add an event handler for 
- * the close event on the server. */
+/** disconnect - Stops the event stream from the client */
 export const disconnect = () => {
     // closes the connection from the client side
     sse.close()
@@ -143,9 +130,3 @@ export const SSE = {
     CLOSED: 2
 }
 
-/** SignalingMessage type */
-export type SignalingMessage = {
-    event: string,
-    // deno-lint-ignore ban-types
-    data: RTCSessionDescriptionInit | RTCIceCandidateInit | object | string[] | string | number,
-}

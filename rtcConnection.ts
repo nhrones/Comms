@@ -5,12 +5,12 @@
 /// <reference lib="deno.ns" />
 /// <reference lib="deno.unstable" />
 
-import { Peer, callee, caller, setCaller } from './peers.ts'
+import type { Peer, SignalingMessage } from './types.ts'
+import { callee, caller, setCaller } from './peers.ts'
 import { 
     dispatch, 
     onEvent, 
-    signal, 
-    SignalingMessage  
+    signal,   
 } from './signaling.ts'
 
 const DEBUG = true
